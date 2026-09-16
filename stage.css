@@ -14,7 +14,7 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--ink);
-  font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family:Georgia, 'Times New Roman', serif;
 }
 .navbar{
   max-width:1180px;
@@ -222,7 +222,7 @@ h1{
   .grid{grid-template-columns:1fr;}
 }
 .section{
-  padding:72px 0;
+  padding:70px 0;
   border-top:1px solid var(--line);
 }
 .section h2{
@@ -231,8 +231,61 @@ h1{
   margin:0 0 36px;
   text-align:center;
 }
-.stats-section{
+.sovereignty-section{
   max-width:1180px;
+  margin:0 auto;
+  padding:54px 32px 66px;
+  color:#202225;
+}
+.sovereignty-intro{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:64px;
+  align-items:center;
+  padding-bottom:28px;
+  border-bottom:1px solid #cfd2d3;
+}
+.sovereignty-intro h2{
+  margin:0;
+  font-family:Georgia, 'Times New Roman', serif;
+  font-size:clamp(30px, 4vw, 42px);
+  line-height:.98;
+  font-weight:700;
+  letter-spacing:-.02em;
+}
+.sovereignty-intro p{
+  max-width:38ch;
+  margin:0;
+  font-family:Georgia, 'Times New Roman', serif;
+  font-size:17px;
+  line-height:1.45;
+}
+.sovereignty-points{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:32px;
+  padding-top:28px;
+}
+.sovereignty-points h3{
+  margin:0 0 12px;
+  font-family:Georgia, 'Times New Roman', serif;
+  font-size:18px;
+  line-height:1.2;
+}
+.sovereignty-points p{
+  margin:0;
+  font-family:Georgia, 'Times New Roman', serif;
+  font-size:15px;
+  line-height:1.45;
+}
+@media (max-width: 760px){
+  .sovereignty-section{padding:40px 20px 46px;}
+  .sovereignty-intro{grid-template-columns:1fr; gap:20px; padding-bottom:24px;}
+  .sovereignty-intro h2{font-size:32px;}
+  .sovereignty-points{grid-template-columns:repeat(2, 1fr); gap:28px 18px; padding-top:24px;}
+}
+.stats-section{
+  max-width:1080px;
   margin:0 auto;
   padding:42px 32px 18px;
 }
@@ -268,11 +321,10 @@ h1{
 .stat-item span{
   font-size:17px;
   line-height:1.25;
-  text-align:center;
+  
 }
 .services-section{
   padding:48px 20px 64px;
-  background:#f8f8f5;
   border-top:none;
 }
 .services-scroll{
@@ -374,12 +426,14 @@ h1{
 .pricing{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
-  gap:28px;
+  max-width:1180px;
+  margin:0 auto;
+  gap:20px;
 }
 .plan{
   border:1px solid var(--line);
   border-radius:14px;
-  padding:28px;
+  padding:22px 20px;
   text-align:center;
 }
 .plan-highlight{
@@ -387,21 +441,31 @@ h1{
   box-shadow:0 8px 24px rgba(10,58,82,.12);
 }
 .plan h3{
-  margin:0 0 12px;
-  font-size:18px;
+  margin:0 0 10px;
+  font-size:17px;
 }
 .plan .price{
-  font-size:32px;
+  font-size:28px;
   font-weight:700;
-  margin:0 0 14px;
+  margin:0 0 12px;
 }
 .plan .price span{
   font-size:14px;
   font-weight:400;
   color:var(--ink-soft);
 }
+.plan ul{
+  margin-top:18px;
+}
+.plan ul li{
+  margin-bottom:8px;
+  line-height:1.35;
+}
+.plan ul li:last-child{
+  margin-bottom:0;
+}
 .comparison-section{
-  max-width:1180px;
+  max-width:1080px;
   margin:0 auto;
   padding:24px 32px 80px;
   color:#24151b;
