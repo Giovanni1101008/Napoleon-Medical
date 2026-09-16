@@ -263,10 +263,12 @@ h1{
   line-height:.95;
   font-weight:700;
   letter-spacing:-.04em;
+  text-align:center;
 }
 .stat-item span{
   font-size:17px;
   line-height:1.25;
+  text-align:center;
 }
 .services-section{
   padding:48px 20px 64px;
