@@ -417,11 +417,12 @@ h1{
 .feature h3{
   font-size:17px;
   margin:0 0 10px;
+  color:white;
 }
 .feature p{
   font-size:15px;
   line-height:1.55;
-  color:var(--ink-soft);
+  color:white;
   margin:0;
 }
 .pricing{
@@ -872,6 +873,7 @@ h1{
 }
 
 .marquee-content {
+  width: 100%;
   display: flex;
   width: max-content;
   animation: scroll linear 32s infinite;
@@ -887,7 +889,7 @@ h1{
 .feature {
   width: 350px;
   padding: 30px;
-  background: #f5f5f5;
+  background: #000;
   border-radius: 20px;
   flex-shrink: 0;
 }
