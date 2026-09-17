@@ -99,14 +99,147 @@
       </div>
     </section>
 
-      <section id="trials" class="section">
-        <iframe 
-          src="" 
-          width="100%" 
-          height="500" 
-          style="border:none; border-radius:14px;">
-        </iframe>
-      </section>
+    <section class="how-it-works-wrapper" id="how-it-works">
+    <div class="how-it-works-sticky">
+      <div class="container how-it-works">
+  
+        <div class="tabs" id="tabs">
+          <button class="tab-btn active" data-tab="0">Écoute de la consultation</button>
+          <button class="tab-btn" data-tab="1">Remplissage du DPI</button>
+          <button class="tab-btn" data-tab="2">Génération compte rendu et ordonnances</button>
+        </div>
+  
+        <div class="tab-panels">
+          <div class="tab-panel active" data-panel="0">
+            <div class="panel-text">
+              <h2>Écoute de la consultation</h2>
+              <p>Le micro capte la consultation, vous gardez le fil de l'échange. NAPOLEON Médical distingue les prises de parole du médecin et du patient, reconnaît le vocabulaire médical français et signale les passages incertains.</p>
+            </div>
+            <div class="panel-media placeholder-box">
+              <span class="placeholder-icon">🖼</span>
+            </div>
+          </div>
+  
+          <div class="tab-panel" data-panel="1">
+            <div class="panel-media placeholder-box">
+              <span class="placeholder-icon">🖼</span>
+            </div>
+            <div class="panel-text">
+              <h2>Remplissage du DPI</h2>
+              <p>Les informations pertinentes de l'échange complètent automatiquement le dossier patient informatisé. Vous relisez, vous validez.</p>
+            </div>
+          </div>
+  
+          <div class="tab-panel" data-panel="2">
+            <div class="panel-text">
+              <h2>Génération compte rendu et ordonnances</h2>
+              <p>Motif, antécédents, examen clinique, conduite à tenir : chaque information trouve sa place dans un document cohérent, prêt à être relu, ce qui accélère la fin de journée.</p>
+            </div>
+            <div class="panel-media placeholder-box">
+              <span class="placeholder-icon">🖼</span>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initScrollDrivenTabs();
+    });
+  
+    function initScrollDrivenTabs() {
+      const wrapper = document.querySelector('.how-it-works-wrapper');
+      if (!wrapper) return;
+  
+      const tabBtns = Array.from(wrapper.querySelectorAll('.tab-btn'));
+      const tabPanels = Array.from(wrapper.querySelectorAll('.tab-panel'));
+      const numTabs = tabBtns.length;
+      if (!numTabs) return;
+  
+      let currentIndex = -1;
+      let ticking = false;
+  
+      // Se hai una navbar sticky, aggiorna qui --header-h con la sua altezza reale.
+      function updateHeaderOffset() {
+        document.documentElement.style.setProperty('--header-h', '0px');
+      }
+  
+      // Ogni tab "occupa" un'altezza di scroll pari a un viewport intero:
+      // così un gesto di scroll normale fa avanzare di un tab alla volta.
+      function updateWrapperHeight() {
+        wrapper.style.height = (numTabs * window.innerHeight) + 'px';
+      }
+  
+      function setActive(index) {
+        if (index === currentIndex) return;
+        currentIndex = index;
+        tabBtns.forEach((b, i) => b.classList.toggle('active', i === index));
+        tabPanels.forEach((p, i) => {
+          p.classList.toggle('active', i === index);
+          if (i === index) {
+            p.style.animation = 'none';
+            void p.offsetWidth;
+            p.style.animation = '';
+          }
+        });
+      }
+  
+      function update() {
+        ticking = false;
+        const rect = wrapper.getBoundingClientRect();
+        const viewportH = window.innerHeight;
+        const scrollableDist = wrapper.offsetHeight - viewportH;
+  
+        if (scrollableDist <= 0) {
+          setActive(0);
+          return;
+        }
+  
+        // progress = 0 quando il wrapper inizia ad essere fissato,
+        // progress = 1 quando sta per sbloccarsi e la pagina riprende a scorrere
+        let progress = -rect.top / scrollableDist;
+        progress = Math.min(1, Math.max(0, progress));
+  
+        let index = Math.floor(progress * numTabs);
+        if (index >= numTabs) index = numTabs - 1;
+        if (index < 0) index = 0;
+        setActive(index);
+      }
+  
+      function onScroll() {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      }
+  
+      updateHeaderOffset();
+      updateWrapperHeight();
+      update();
+  
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', () => {
+        updateHeaderOffset();
+        updateWrapperHeight();
+        update();
+      });
+  
+      // Cliccare su un tab porta lo scroll al punto corrispondente
+      tabBtns.forEach((btn, i) => {
+        btn.addEventListener('click', () => {
+          const scrollableDist = wrapper.offsetHeight - window.innerHeight;
+          if (scrollableDist <= 0) { setActive(i); return; }
+          const wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
+          const targetProgress = (i + 0.5) / numTabs;
+          const targetScroll = wrapperTop + targetProgress * scrollableDist;
+          window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        });
+      });
+    }
+  </script>
     
     <section id="temoignages" class="section">
       <h2>Ils utilisent NAPOLEON Médical</h2>
