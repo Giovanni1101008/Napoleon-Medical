@@ -943,7 +943,7 @@ h1{
   }
  
   .placeholder-box {
-    background: #ffff;
+    background: #f7f9fb;
     border: 1px solid var(--border);
     border-radius: 10px;
     display: flex;
